@@ -19,7 +19,9 @@ public class LockFontSize extends CordovaPlugin {
 
     @Override
     public void initialize(final CordovaInterface cordova, CordovaWebView webView) {
-        this.webView = (WebView) webView;
+        if (webView.getView() instanceof WebView) {
+            this.webView = (WebView) webView.getView();
+        }
         super.initialize(cordova, webView);
     }
 
@@ -27,8 +29,12 @@ public class LockFontSize extends CordovaPlugin {
         if (action.equals("init")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
-                    webView.getSettings().setTextZoom(NORMAL_TEXT_ZOOM);
-                    callbackContext.success();
+                    if (webView == null) {
+                        callbackContext.error("View not found");
+                    } else {
+                        webView.getSettings().setTextZoom(NORMAL_TEXT_ZOOM);
+                        callbackContext.success();
+                    }
                 }
             });
         }
