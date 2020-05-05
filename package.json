@@ -1,0 +1,10 @@
+{
+  "version": "0.0.1",
+  "name": "cordova-plugin-lock-font-size",
+  "cordova_name": "Android Font size lock plugin",
+  "license": "MIT",
+  "platforms": [
+    "android"
+  ],
+  "engines": {}
+}
